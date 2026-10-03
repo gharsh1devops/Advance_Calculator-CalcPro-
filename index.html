@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Multi-Function Calculator</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="dark-theme">
+
+    <!-- Sidebar Overlay & Menu -->
+    <div id="sidebarOverlay" class="sidebar-overlay"></div>
+    <nav id="sidebarMenu" class="sidebar-menu">
+        <div class="sidebar-header">
+            <h3><i class="fa-solid fa-calculator"></i> Calculator</h3>
+            <button id="closeSidebar"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="sidebar-section-title">Calculator</div>
+        <ul>
+            <li class="menu-item active" data-mode="standard"><i class="fa-solid fa-calculator"></i> Standard</li>
+            <li class="menu-item" data-mode="scientific"><i class="fa-solid fa-flask"></i> Scientific</li>
+            <li class="menu-item" data-mode="graphing"><i class="fa-solid fa-chart-line"></i> Graphing</li>
+            <li class="menu-item" data-mode="programmer"><i class="fa-solid fa-code"></i> Programmer</li>
+        </ul>
+        <div class="sidebar-section-title">Converter</div>
+        <ul>
+            <li class="menu-item" data-mode="currency"><i class="fa-solid fa-coins"></i> Currency</li>
+            <li class="menu-item" data-mode="volume"><i class="fa-solid fa-cube"></i> Volume</li>
+            <li class="menu-item" data-mode="length"><i class="fa-solid fa-ruler"></i> Length</li>
+            <li class="menu-item" data-mode="weight"><i class="fa-solid fa-weight-scale"></i> Weight and mass</li>
+            <li class="menu-item" data-mode="temperature"><i class="fa-solid fa-temperature-half"></i> Temperature</li>
+            <li class="menu-item" data-mode="energy"><i class="fa-solid fa-fire"></i> Energy</li>
+            <li class="menu-item" data-mode="area"><i class="fa-solid fa-solar-panel"></i> Area</li>
+            <li class="menu-item" data-mode="speed"><i class="fa-solid fa-gauge"></i> Speed</li>
+        </ul>
+    </nav>
+
+    <div class="app-container" id="appContainer">
+        <!-- Header Title -->
+        <header class="app-header">
+            <div class="logo-area">
+                <button id="hamburgerBtn" class="hamburger-btn" title="Open Menu"><i class="fa-solid fa-bars"></i></button>
+                <span class="logo-icon"><i class="fa-solid fa-calculator"></i></span>
+                <span class="app-name">CalcPro <small>v1.0</small></span>
+            </div>
+            <h1 id="panelTitle">Advanced Multi-Function Calculator</h1>
+            <div class="header-tools">
+                <button id="floatToggle" title="Floating Mode"><i class="fa-solid fa-clone"></i></button>
+                <button id="themeToggle" title="Toggle Theme"><i class="fa-solid fa-moon"></i></button>
+            </div>
+        </header>
+
+        <!-- Main Dashboard Grid -->
+        <div class="dashboard-grid">
+            
+            <!-- Left Side: Calculator, Scientific, Graphing, Programmer & Converter Section -->
+            <div class="calculator-card">
+                <!-- Standard/Scientific Display Screen -->
+                <div id="calcDisplayArea">
+                    <div class="display-screen">
+                        <div id="previousInput" class="previous-input"></div>
+                        <div id="currentInput" class="current-input">0</div>
+                    </div>
+
+                    <!-- Mode Selector Bar -->
+                    <div class="mode-selectors">
+                        <button id="stdTabBtn" class="mode-btn active">Standard</button>
+                        <button id="sciTabBtn" class="mode-btn">Scientific</button>
+                    </div>
+
+                    <!-- Scientific Panel Grid -->
+                    <div id="scientificPanel" class="scientific-panel hidden">
+                        <div class="trig-modes">
+                            <label><input type="radio" name="angleUnit" value="deg" checked> Deg</label>
+                            <label><input type="radio" name="angleUnit" value="rad"> Rad</label>
+                        </div>
+                        <button class="btn sci" data-action="sin">sin</button>
+                        <button class="btn sci" data-action="cos">cos</button>
+                        <button class="btn sci" data-action="tan">tan</button>
+                        <button class="btn sci" data-action="asin">sin⁻¹</button>
+                        <button class="btn sci" data-action="acos">cos⁻¹</button>
+                        <button class="btn sci" data-action="atan">tan⁻¹</button>
+                        <button class="btn sci" data-action="pi">π</button>
+                        <button class="btn sci" data-action="e">e</button>
+                        <button class="btn sci" data-action="pow">xʸ</button>
+                        <button class="btn sci" data-action="x3">x³</button>
+                        <button class="btn sci" data-action="x2">x²</button>
+                        <button class="btn sci" data-action="ex">eˣ</button>
+                        <button class="btn sci" data-action="10x">10ˣ</button>
+                        <button class="btn sci" data-action="yroot">ʸ√x</button>
+                        <button class="btn sci" data-action="cbrt">³√x</button>
+                        <button class="btn sci" data-action="sqrt">√x</button>
+                        <button class="btn sci" data-action="ln">ln</button>
+                        <button class="btn sci" data-action="log">log</button>
+                        <button class="btn sci" data-action="inv">1/x</button>
+                        <button class="btn sci" data-action="fact">n!</button>
+                    </div>
+
+                    <!-- Main Keypad Grid -->
+                    <div class="main-keypad">
+                        <button class="btn action" data-value="AC">AC</button>
+                        <button class="btn action" data-value="DEL"><i class="fa-solid fa-delete-left"></i></button>
+                        <button class="btn operator" data-value="(">(</button>
+                        <button class="btn operator" data-value=")">)</button>
+                        
+                        <button class="btn number" data-value="7">7</button>
+                        <button class="btn number" data-value="8">8</button>
+                        <button class="btn number" data-value="9">9</button>
+                        <button class="btn operator" data-value="/">÷</button>
+                        
+                        <button class="btn number" data-value="4">4</button>
+                        <button class="btn number" data-value="5">5</button>
+                        <button class="btn number" data-value="6">6</button>
+                        <button class="btn operator" data-value="*">×</button>
+                        
+                        <button class="btn number" data-value="1">1</button>
+                        <button class="btn number" data-value="2">2</button>
+                        <button class="btn number" data-value="3">3</button>
+                        <button class="btn operator" data-value="-">-</button>
+                        
+                        <button class="btn number" data-value="0">0</button>
+                        <button class="btn number" data-value=".">.</button>
+                        <button class="btn equal" data-value="=">=</button>
+                        <button class="btn operator" data-value="+">+</button>
+                    </div>
+                </div>
+
+                <!-- Dynamic Converter Working Panel -->
+                <div id="dynamicConverterPanel" class="dynamic-conv-panel hidden">
+                    <h3 id="convTitle" style="margin-bottom: 15px; font-size: 16px; color: var(--equal-bg);">Converter</h3>
+                    <div class="curr-group">
+                        <label>Enter Value:</label>
+                        <input type="number" id="convInputVal" value="1" style="width:100%; padding:10px; border-radius:8px; border:1px solid var(--border-color); background:var(--bg-color); color:var(--text-primary); font-size:15px;">
+                    </div>
+                    <div class="curr-row" style="margin-top:10px;">
+                        <div class="curr-group" style="flex:1;">
+                            <label>From Unit:</label>
+                            <select id="convFromUnit" style="width:100%; padding:10px; border-radius:8px; border:1px solid var(--border-color); background:var(--bg-color); color:var(--text-primary); font-size:14px;"></select>
+                        </div>
+                        <div class="curr-group" style="flex:1;">
+                            <label>To Unit:</label>
+                            <select id="convToUnit" style="width:100%; padding:10px; border-radius:8px; border:1px solid var(--border-color); background:var(--bg-color); color:var(--text-primary); font-size:14px;"></select>
+                        </div>
+                    </div>
+                    <button id="runGenericConvert" class="convert-btn" style="margin-top:15px;">Convert Unit</button>
+                    <div id="convResultBox" class="curr-result" style="font-size:16px; margin-top:15px;">Result: --</div>
+                </div>
+
+                <!-- Graphing Calculator Panel -->
+                <div id="graphingPanel" class="graphing-panel hidden">
+                    <h3 style="margin-bottom: 10px; font-size: 16px; color: var(--equal-bg);">Graph Plotter y = f(x)</h3>
+                    <div class="curr-group">
+                        <label>Enter Function (e.g., x*x, Math.sin(x), 2*x + 1):</label>
+                        <input type="text" id="graphFuncInput" value="x * x" style="width:100%; padding:10px; border-radius:8px; border:1px solid var(--border-color); background:var(--bg-color); color:var(--text-primary); font-size:14px;">
+                    </div>
+                    <button id="plotGraphBtn" class="convert-btn" style="margin-top:8px;">Plot Graph</button>
+                    <div style="margin-top: 15px; background: var(--bg-color); border-radius: 12px; padding: 10px; text-align: center;">
+                        <canvas id="graphCanvas" width="340" height="200" style="background: var(--card-bg); border-radius: 8px; width: 100%; max-width: 340px;"></canvas>
+                    </div>
+                </div>
+
+                <!-- Programmer Calculator Panel -->
+                <div id="programmerPanel" class="programmer-panel hidden">
+                    <h3 style="margin-bottom: 12px; font-size: 16px; color: var(--equal-bg);">Programmer Base Converter</h3>
+                    <div class="curr-group">
+                        <label>Decimal (DEC):</label>
+                        <input type="number" id="progDec" value="0" style="width:100%; padding:8px; border-radius:8px; border:1px solid var(--border-color); background:var(--bg-color); color:var(--text-primary);">
+                    </div>
+                    <div class="curr-group">
+                        <label>Hexadecimal (HEX):</label>
+                        <input type="text" id="progHex" value="0" style="width:100%; padding:8px; border-radius:8px; border:1px solid var(--border-color); background:var(--bg-color); color:var(--text-primary);">
+                    </div>
+                    <div class="curr-group">
+                        <label>Octal (OCT):</label>
+                        <input type="text" id="progOct" value="0" style="width:100%; padding:8px; border-radius:8px; border:1px solid var(--border-color); background:var(--bg-color); color:var(--text-primary);">
+                    </div>
+                    <div class="curr-group">
+                        <label>Binary (BIN):</label>
+                        <input type="text" id="progBin" value="0" style="width:100%; padding:8px; border-radius:8px; border:1px solid var(--border-color); background:var(--bg-color); color:var(--text-primary);">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Side: History & Currency Converter Panels -->
+            <div class="side-panels">
+                <!-- History Box -->
+                <div class="panel-box history-box">
+                    <div class="panel-header">
+                        <h3>Calculation History</h3>
+                        <button id="clearHistory" title="Clear History"><i class="fa-solid fa-trash"></i></button>
+                    </div>
+                    <ul id="historyList">
+                        <li style="color: var(--text-secondary); text-align: center;">No history yet</li>
+                    </ul>
+                </div>
+
+                <!-- Currency Converter Box (Live Online API Working) -->
+                <div class="panel-box currency-box">
+                    <h3>Currency Converter <small style="font-size:10px; color:#22c55e;">(Live)</small></h3>
+                    <div class="curr-group">
+                        <label>Amount & Currency:</label>
+                        <div class="curr-row">
+                            <input type="number" id="currAmount" value="1">
+                            <select id="fromCurrency">
+                                <option value="USD" selected>USD</option>
+                                <option value="INR">INR</option>
+                                <option value="EUR">EUR</option>
+                                <option value="GBP">GBP</option>
+                                <option value="CAD">CAD</option>
+                                <option value="AUD">AUD</option>
+                                <option value="JPY">JPY</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="curr-group">
+                        <label>Convert To:</label>
+                        <select id="toCurrency">
+                            <option value="USD">USD</option>
+                            <option value="INR" selected>INR</option>
+                            <option value="EUR">EUR</option>
+                            <option value="GBP">GBP</option>
+                            <option value="CAD">CAD</option>
+                            <option value="AUD">AUD</option>
+                            <option value="JPY">JPY</option>
+                        </select>
+                    </div>
+                    <button id="convertBtn" class="convert-btn">Convert Currency</button>
+                    <div id="currResult" class="curr-result">Result: --</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
